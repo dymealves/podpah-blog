@@ -1,0 +1,83 @@
+<%- include("./partials/head") %>
+
+<body>
+    <%- include("./partials/navbar") %>
+
+    <div class="container mt-4">
+        <div class="jumbotron">
+            <h1 class="display-4">Bem-vindo ao Podpah!</h1>
+            <p class="lead">Esse blog foi feito para levar as novidades do Podpah até você em um piscar de olhos.</p>
+            <hr>
+        <% if(!user) { %>
+            <p>Crie sua conta agora e seja sempre o primeiro a receber as novidades.</p>
+            <a href="/user/signup" class="btn btn-warning btn-lg">Crie sua conta</a>
+        </div>
+
+        <hr>
+        <% } else { %>
+            
+        <% } %>   
+
+        <% articles.rows.forEach(article => { %>
+            <div class="card mt-4">
+                <div class="card-header">
+                    <a href="/article/<%= article.slug %>" class="text-decoration-none text-dark">
+                        <h1 class="color-warning-hover transition d-inline-block"><%= article.title %></h1>
+                    </a>
+
+                    <%- article.description %>
+                </div>
+                <div class="card-body">
+                    <p>Categorias: <%= article.category.title %> </p>
+                    <p class="m-0">Data de Criação <%= article.createdAt %></p>
+                </div>
+            </div>
+        <% }) %>
+
+        <div class="card-footer my-4">
+            <% if (page === "1" || page === undefined) { %>
+                <a class="text-decoration-none text-muted cursor-blocked d-inline-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                    </svg>
+                </a>
+            <% } else if (page === "2") { %>
+                <a href="/" class="text-decoration-none text-dark color-warning-hover transition d-inline-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                    </svg>
+                </a>
+            <% } else { %>
+                <a href="/?page=<%= Number(page) - 1 %>" class="text-decoration-none text-dark color-warning-hover transition d-inline-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                    </svg>
+                </a>
+            <% } %>
+
+            <span class="mx-4">Exibindo resultados <%= offset + 1 %> ao <%= offset + limit %> de <%= articles.count %></span>
+
+            <% if (!next) { %>
+                <a class="text-decoration-none text-muted cursor-blocked d-inline-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                    </svg>
+                </a>
+            <% } else if (page === undefined) { %>
+                <a href="/?page=2" class="text-decoration-none text-dark color-warning-hover transition d-inline-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                    </svg>
+                </a>
+            <% } else { %>
+                <a href="/?page=<%= Number(page) + 1 %>" class="text-decoration-none text-dark color-warning-hover transition d-inline-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                    </svg>
+                </a>
+            <% } %>
+        </div>
+    </div>
+</body>
+
+<%- include("./partials/scripts") %>

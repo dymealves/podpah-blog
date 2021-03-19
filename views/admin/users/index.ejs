@@ -1,0 +1,64 @@
+<%- include("../../partials/head") %>
+
+<body>
+    <%- include("../../partials/navbar") %>
+
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="display-4">Listagem de Usuários</h1>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>NOME COMPLETO</th>
+                            <th>EMAIL</th>
+                            <th>AÇÕES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% users.forEach(user => { %>
+                            <tr>
+                                <td><%= user.id %></td>
+                                <td><%= user.fullName %></td>
+                                <td><%= user.email %></td>
+                                <td>
+                                    <button type="button" class="btn btn-dark me-2" data-bs-toggle="modal" data-bs-target="#exampleModal<%= user.id %>">Deletar</button>
+                                    
+                                    <div class="modal fade" id="exampleModal<%= user.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-4" id="exampleModalLabel">Escolhe com cuidado!</h1>
+
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <span>Deseja deletar o usuário <%= user.fullName %> ?</span>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Fechar</button>
+                                                    <form action="/admin/users/delete" method="post" class="d-inline">
+                                                        <input type="hidden" name="id" value="<%= user.id %>">
+
+                                                        <button type="submit" class="btn btn-warning">Deletar Usuário</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <a href="/admin/users/update/<%= user.id %>" class="btn btn-warning">Editar</a>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+<%- include("../../partials/scripts") %>

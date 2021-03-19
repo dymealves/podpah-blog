@@ -1,0 +1,35 @@
+<%- include("../../partials/head") %>
+
+<body>
+    <%- include("../../partials/navbar") %>
+
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="display-4">Edite o usuário</h1>
+            </div>
+            <div class="card-body">
+                <form action="/admin/users/update" method="post" autocomplete="off">
+                    <input type="hidden" name="id" value="<%= user.id %>">
+
+                    <label for="fullName" class="d-none">Nome Completo do Usuário</label>
+                        <input type="text" name="fullName" id="fullName" placeholder="Digite o nome completo do usuário" class="form-control" value="<%= user.fullName %>">
+
+                    <label for="permission" class="d-none">Permissão do Usuário</label>
+                        <select name="permission" id="permission" class="form-control mt-4">
+                            <option disabled value="disabled">Selecione a permissão do usuário</option>
+
+                            <option value="administrator">Administrador</option>
+                            <option selected value="client">Cliente</option>
+                        </select>
+                    
+                    <a href="/admin/users" class="btn btn-dark mt-4">Cancelar</a>
+
+                    <button type="submit" class="btn btn-warning mt-4">Salvar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+<%- include("../../partials/scripts") %>

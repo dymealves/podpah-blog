@@ -1,0 +1,12 @@
+.transition {
+    transition-delay: .25s;
+    transition: all .5s;
+}
+
+.color-warning-hover:hover {
+    color: #ffc107 !important;
+}
+
+.cursor-blocked {
+    cursor: not-allowed !important;
+}

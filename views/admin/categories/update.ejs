@@ -1,0 +1,27 @@
+<%- include("../../partials/head") %>
+
+<body>
+    <%- include("../../partials/navbar") %>
+
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="display-4">Edite a categoria</h1>
+            </div>
+            <div class="card-body">
+                <form action="/admin/categories/update" method="post" autocomplete="off">
+                    <input type="hidden" name="id" value="<%= category.id %>">
+
+                    <label for="title" class="d-none">Título da Categoria</label>
+                        <input type="text" name="title" id="title" placeholder="Digite o título da categoria" class="form-control" value="<%= category.title %>">
+                    
+                    <a href="/admin/categories" class="btn btn-dark mt-4">Cancelar</a>
+
+                    <button type="submit" class="btn btn-warning mt-4">Salvar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+<%- include("../../partials/scripts") %>

@@ -1,0 +1,49 @@
+<%- include("../../partials/head") %>
+
+<body>
+    <%- include("../../partials/navbar") %>
+
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="display-4">Edite o artigo</h1>
+            </div>
+            <div class="card-body">
+                <form action="/admin/articles/update" method="post" autocomplete="off">
+                    <input type="hidden" name="id" value="<%= article.id %>">
+
+                    <label for="title" class="d-none">Título do Artigo</label>
+                        <input type="text" name="title" id="title" placeholder="Digite o título do artigo" class="form-control" value="<%= article.title %>">
+
+                    <label for="category" class="d-none">Categoria do Artigo</label>
+                        <select name="category" id="category" class="form-control mt-4">
+                            <option disabled value="disabled">Selecione a categoria do artigo</option>
+
+                            <% categories.forEach(category => { %>
+                                <% if(category.id === article.categoryId) { %>
+                                    <option selected value="<%= category.id %>"><%= category.title %></option>
+                                <% } else { %>
+                                    <option value="<%= category.id %>"><%= category.title %></option>
+                                <% } %>
+                            <% }) %>
+                        </select>
+
+                    <label for="description" class="d-none">Descrição do Artigo</label> <br>
+                        <textarea name="description" id="descriptionArticle" cols="30" rows="10" placeholder="Adicione a descrição do artigo" class="form-control"><%- article.description %></textarea>
+
+                    <label for="content" class="d-none">Conteúdo do Artigo</label> <br>
+                        <textarea name="content" id="contentArticle" cols="30" rows="10" placeholder="Adicione o conteúdo do artigo" class="form-control" onload="autoResize()"><%- article.content %></textarea>
+                    
+                    <a href="/admin/articles" class="btn btn-dark mt-4">Cancelar</a>
+
+                    <button type="submit" class="btn btn-warning mt-4">Salvar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="/tinymce/tinymce.min.js"></script>
+    <script src="/js/tinymce.js"></script>
+</body>
+
+<%- include("../../partials/scripts") %>

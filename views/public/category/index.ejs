@@ -1,0 +1,30 @@
+<%- include("../../partials/head") %>
+
+<body>
+    <%- include("../../partials/navbar") %>
+
+    <div class="container mt-4">
+        <h1 class="display-4"><%= category.title %></h1>
+
+        <hr>
+
+        <% articles.forEach(article => { %>
+            <div class="card mt-4">
+                <div class="card-header">
+                    <a href="/article/<%= article.slug %>" class="text-decoration-none text-dark">
+                        <h1 class="color-warning-hover transition d-inline-block"><%= article.title %></h1>
+                    </a>
+
+                    <div class="description">
+                        <%- article.description %>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="m-0">Data de Criação <%= article.createdAt %></p>
+                </div>
+            </div> 
+        <% }) %>
+    </div>
+</body>
+
+<%- include("../../partials/scripts") %>

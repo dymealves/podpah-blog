@@ -1,0 +1,70 @@
+<%- include("../../partials/head") %>
+
+<body>
+    <%- include("../../partials/navbar") %>
+
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h1 class="display-4">Listagem de Categorias</h1>
+
+                <a href="/admin/categories/register" class="btn btn-warning">Cadastrar Categoria</a>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>TÍTULO</th>
+                            <th>SLUG</th>
+                            <th>AÇÕES</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <% categories.forEach(category => { %>
+                            <tr>
+                                <td><%= category.id %></td>
+                                <td><%= category.title %></td>
+                                <td><%= category.slug %></td>
+                                <td>
+                                    <button type="button" class="btn btn-dark me-2" data-bs-toggle="modal" data-bs-target="#exampleModal<%= category.id %>">Deletar</button>
+                                    
+                                    <div class="modal fade" id="exampleModal<%= category.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-4" id="exampleModalLabel">Escolhe com cuidado!</h1>
+
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <span>Deseja deletar a categoria <%= category.title %> e seus artigos ?</span>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Fechar</button>
+
+                                                    <form action="/admin/categories/delete" method="post" class="d-inline">
+                                                        <input type="hidden" name="id" value="<%= category.id %>">
+
+                                                        <button type="submit" class="btn btn-warning">Deletar Categoria</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <a href="/admin/categories/update/<%= category.id %>" class="btn btn-warning me-2">Editar</a>
+
+                                    <a href="/category/<%= category.slug %>" class="btn btn-primary">Visualizar</a>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+<%- include("../../partials/scripts") %>

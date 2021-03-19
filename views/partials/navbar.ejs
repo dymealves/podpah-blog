@@ -1,0 +1,68 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <a href="/">
+            <img src="/img/logo.jpg" alt="Logo do site" class="rounded-circle me-4">
+        </a>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+          <% if(user && user.permission === "administrator") { %>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a href="/admin/categories" class="nav-link">Administrar Categorias</a>
+              </li>
+              <li class="nav-item">
+                <a href="/admin/articles" class="nav-link me-2">Administrar Artigos</a>
+              </li>
+              <li class="nav-item">
+                <a href="/admin/users" class="nav-link me-2">Administrar Usuários</a>
+              </li>
+            </ul>
+          <% } else { %>
+          
+          <% } %>
+        <div class="d-flex">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="/" aria-current="page" class="nav-link active me-2">Início</a></li>
+    
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                      <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                        <ul class="navbar-nav">
+                          <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              Categorias
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                                <% categories.forEach(category => { %>
+                                    <li>
+                                        <a class="dropdown-item" href="/category/<%= category.slug %>"><%= category.title %></a>
+                                    </li>
+                                <% }) %>
+                            </ul>
+                          </li>
+                        </ul>
+                    </div>
+    
+                <% if(user) { %>
+                  <li class="nav-item">
+                    <a href="/user/logout" class="nav-link me-2">Sair 
+                      <img src="/img/logout.ico" alt="Ícone de Logout">
+                    </a>
+                  </li>
+                <% } else { %>
+                  <li class="nav-item">
+                    <a href="/user/signup" class="nav-link me-2">Cadastrar-se</a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="/user/signin" class="nav-link me-2">Entrar</a>
+                  </li>
+                <% } %>
+            </ul>
+        </div>
+      </div>
+    </div>
+</nav>

@@ -1,0 +1,29 @@
+<%- include("../../partials/head") %>
+
+<body>
+    <%- include("../../partials/navbar") %>
+    
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="display-4">Crie sua conta agora e seja sempre o primeiro a receber as novidades</h1>
+            </div>
+            <div class="card-body">
+                <form action="/user/signup" method="post" autocomplete="off">
+                    <label for="fullName" class="d-none">Nome Completo</label>
+                        <input type="text" name="fullName" id="fullName" placeholder="Digite seu nome completo" class="form-control">
+                    <label for="email" class="d-none">Email do Usuário</label>
+                        <input type="text" name="email" id="email" placeholder="Digite seu endereço de email" class="form-control mt-4">
+                    <label for="password" class="d-none">Senha do Usuário</label>
+                        <input type="password" name="password" id="password" placeholder="Digite sua senha" class="form-control mt-4">
+
+                    <a href="/" class="btn btn-dark mt-4">Cancelar</a>
+
+                    <button type="submit" class="btn btn-warning mt-4">Criar conta</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+<%- include("../../partials/scripts") %>
