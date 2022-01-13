@@ -3,6 +3,7 @@ import sequelize from "sequelize"
 import ejs from "ejs"
 import bodyParser from "body-parser"
 import session from "express-session"
+import path from "path"
 
 import { connection } from "./config/database/connection.js"
 
@@ -42,11 +43,11 @@ app.use((req, res, next) => {
 
 /* Configurando Arquivos Estáticos */
 
-app.use(express.static("src/public"))
+app.use(express.static(`${__dirname}/public`))
 
 /* Configurando View Engine */
 
-app.set('views', "C:/wamp64/www/cursonode.com/podpahapp/src/views", 'views');
+app.set("views", `${__dirname}/views`, "views")
 app.set("view engine", "ejs")
 
 /* Configurando Body Parser */
